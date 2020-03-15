@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="col-lg-6 offset-lg-3 mt-3 jumbotron">
+    <h3>Hi {{ user.username }}, update your profile here!</h3>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {{user_form|crispy }} {{profile_form|crispy }}
+        <br>
+        <button class="mt-2 btn btn-primary" type="submit">Update</button>
+        <a href="{{ user.profile.get_absolute_url }}">Cancel</a>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="jumbotron">
+    <div class="jumbotron rounded h2 text-center my-3 p-0">Featured Blog</div>
+    {% for obj in featured %}
+    <div class="row d-flex">
+        <div class="{% cycle 'order-2' 'order-1' %} d-flex {% if not obj.thumbnail %} col-lg-12 {% else %} col-lg-7 {% endif %}">
+            <div>
+                <a href="{{ obj.get_absolute_url }}">
+                    <h2 class="h4">{{ obj.title }}</h2>
+                </a>
+                <p class="text-justify">{{ obj.heading|truncatewords:100 }}</p>
+                <div class="d-flex">
+                    <div><img class="img-fluid rounded-circle" src="{{ obj.author.headshot.url }}" width="45px" alt="..." class="img-fluid"></div>
+                    <a href="{{ obj.author.user.profile.get_absolute_url }}" class="d-flex">
+                        <div class="mx-2">{{ obj.author.user }}</div>
+                    </a>
+                    <div class="">{{ obj.timestamp|timesince }} ago</div>
+                    <div>(5)</div>
+                </div>
+            </div>
+        </div>
+        {% if obj.thumbnail %}
+        <div class="{% cycle 'order-1' 'order-2' %} col-lg-5"><img class="rounded img-fluid" src="{{ obj.thumbnail.url }}" alt="..."></div>
+        {% endif %}
+    </div>
+    <hr> {% endfor %}
+</div>
+{% endblock content %}

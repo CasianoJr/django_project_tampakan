@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %} {% block content %} {% load crispy_forms_tags %}
+<div class="jumbotron col-lg-6 offset-lg-3">
+    {% if post.author.user == user %}
+    <h2 class="p-4">Are your sure you want to delete "{{post.title}} "?</h2>
+    <div class="d-flex">
+        {% if post.thumbnail %}
+        <img class="img-fluid rounded" width="200px" src="{{post.thumbnail.url}}" alt=""> {% endif %}
+        <div class="p-2 text-justify">{{post.heading|truncatewords:20 }}</div>
+    </div>
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div class="offset-sm-6">
+            <input type="submit" class="btn btn-danger" value="Delete">
+            <a href="{{ post.get_absolute_url }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

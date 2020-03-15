@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="col-lg-6 offset-lg-3 mt-3 jumbotron">
+    <h2>{{ obj.user.username }} Profile</h2>
+    <div class="content-section">
+        <img class="rounded-circle img-fluid" width="200px" src="{{ obj.headshot.url }}">
+        <p class="text-secondary">{{ obj.user.email }}</p>
+        <p class="text-secondary">{{ obj.user.first_name }} {{ obj.user.last_name}}</p>
+        {% if obj.user == user %}
+        <a href="{% url 'user-profile-update'%}" class="btn btn-secondary">Update Profile</a> {% endif %}
+    </div>
+</div>
+{% endblock content %}

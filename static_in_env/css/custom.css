@@ -1,0 +1,43 @@
+.body-bg {
+    background: #4a7d70;
+    background-image: linear-gradient( 90deg, #440154, #482475, #414487, #355f8d, #2a788e, #21908d, #22a884, #42be71, #7ad151);
+}
+
+.mayor-img {
+    -webkit-clip-path: circle(32.4% at 45% 34%);
+    clip-path: circle(32.4% at 45% 34%);
+    height: 150px;
+    float: left;
+    border: 5px solid #fff;
+    shape-outside: circle(32.4% at 45% 34%);
+}
+
+.img-carousel {
+    width: 1200px;
+    height: 600px;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.card-header {
+    overflow: hidden;
+}
+
+.text-shadowing {
+    /* background: green; */
+    text-shadow: 3px 3px 5px black, 6px 6px 10px black;
+}
+
+.inlarge-scale {
+    transition: .7s;
+}
+
+.inlarge-scale:hover {
+    transform: scale(1.5, 1.5);
+}
+
+@media(max-width: 1200px) {
+    .small-width-hide {
+        display: none;
+    }
+}
