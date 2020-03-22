@@ -75,7 +75,7 @@ def blog_delete(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
         Post.objects.get(slug=slug).delete()
-        return redirect('blog-featured')
+        return redirect('home')
     return render(request, 'blog/delete.html', {'post': post})
 
 

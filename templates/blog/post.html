@@ -1,74 +1,90 @@
-{% extends 'base/base.html' %} {% block content %}
-<div class="jumbotron my-4 mx-auto col-lg-10">
-    <div class="row">
-        <div class="col-lg-8">
-            {% if post.thumbnail %}
-            <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid rounded"> {% endif %}
-            <div class="row">
-                <h1>{{ post.title }}</h1>
-                {% if post.author.user == user %}
-                <div class="text-center">
-                    <a class="btn btn-secondary mt-2 ml-2" href="{% url 'blog-update' post.slug %}">Update</a>
-                    <a class="btn btn-danger mt-2" href="{{ post.get_delete_url }}">Delete</a>
-                </div>
-                {% endif %}
-            </div>
-            <div class="d-flex">
-            <div>
-                <img class="img-fluid rounded-circle" src="{{ post.author.headshot.url }}" width="50px" height='50px' alt="...">
-            </div>
-            <div>
-
-                <a href="{{ post.author.user.profile.get_absolute_url }}">
-                    <div class="mx-3 title"><span>{{ post.author.user }}</span></div>
-                </a>
-            </div>
-                <div>{{ post.timestamp|timesince }} ago</div>
-            </div>
-
-
-            <p class="text-justify">{{ post.heading}}</p>
-            <p> {{ post.content|safe }}</p>
-            <!-- Comments -->
-            <h3 class="h6">Post Comments: <span>({{post.get_comments.count}})</span></h3>
-            {% for comment in post.get_comments %}
-            <hr>
-            <div class="d-flex">
-                <div><img src="{{ comment.user.profile.headshot.url }}" alt="{{ comment.user.profile.thumbnail.url }}" class="img-fluid rounded-circle" width="50px"></div>
-                <div><strong><a href="{{ comment.user.profile.get_absolute_url }}">{{ comment.user }} </a></strong></div>
-                <div class="ml-3">{{ comment.timestamp }}</div>
-            </div>
-            <p class="ml-5">{{ comment.comment }} </p>
-            {% endfor %} {% if user.is_authenticated %}
-            <div class="h6">Leave a comment:</div>
-            <form action="." method="POST">
-                {% csrf_token %}
-                <textarea name="comment" class="form-group rounded col-md-12" placeholder="Type your comment" class="form-control"></textarea>
-                <button type="submit" class="btn btn-secondary">Submit Comment</button>
-            </form>
-            {% else %}
-            <a href="{% url 'user-login' %}" class="h6">Please login to leave a comment.</a> {% endif %}
-        </div>
-        <aside class="col-lg-4">
-            <h3 class="h6">Search the blog</h3>
-            <form class="form-inline mt-2 mt-md-0" action="{% url 'blog-search'%}">
-                <input class="form-control w-lg-75" type="text" name='search' placeholder="Search here">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <div class="m-3">
-                <h3>Latest Posts</h3>
-                {% for object in latest_post %}
-                <a href="{{ object.get_absolute_url }}" class="card boarder shadow p-2 text-dark">
-                    <div>
-                        <div><strong>{{ object.title }}</strong> </div>
-                        {% if object.thumbnail %}
-                        <div class="text-center"><img class="img-fluid" width="200px" src="{{ object.thumbnail.url }}" alt="{{ object.title }} image"> </div>{% endif %}
-                        <div class="m-2">{{ object.heading|truncatechars:100 }}</div>
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="jumbotron my-4 mx-auto col-lg-10">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid rounded">
+                    {% endif %}
+                    <div class="row">
+                        <div class="h3 ml-4">{{ post.title }}</div>
+                        {% if post.author.user == user %}
+                            <div class="text-center mx-auto">
+                                <a class="btn btn-secondary mt-2 ml-2" href="{% url 'blog-update' post.slug %}">Update</a>
+                                <a class="btn btn-danger mt-2" href="{{ post.get_delete_url }}">Delete</a>
+                            </div>
+                        {% endif %}
                     </div>
-                </a>
-                {% endfor %}
-            </div>
-        </aside>
-    </div>
-</div>
-{% endblock content %}
+                    <div class="d-flex">
+                        <img class="img-fluid rounded-circle" src="{{ post.author.headshot.url }}" width="40px" alt="...">
+                            <div>
+                                <a href="{{ post.author.user.profile.get_absolute_url }}">
+                                    <div class="mx-3 title">
+                                        <span>{{ post.author.user }}</span>
+                                    </div>
+                                </a>
+                                <div class="mx-3 small text-muted">{{ post.timestamp }}
+                                    ago</div>
+                            </div>
+
+                        </div>
+
+
+                        <p class="text-justify">{{ post.heading }}</p>
+                        <p>
+                            {{ post.content|safe }}</p>
+                        <!-- Comments -->
+                        <h3 class="h6 mb-3">Post Comments:
+                            <span>({{ post.get_comments.count }})</span>
+                        </h3>
+                        {% for comment in post.get_comments %}
+                            <div class="d-flex small">
+                                <div>
+                                    <img src="{{ comment.user.profile.headshot.url }}" alt="{{ comment.user.profile.thumbnail.url }}" class="img-fluid rounded-circle" width="30px"></div>
+                                    <div>
+                                        <a href="{{ comment.user.profile.get_absolute_url }}" class="mx-3">{{ comment.user }}
+                                        </a>
+                                        <div class="mx-3 text-muted small">{{ comment.timestamp }}</div>
+                                    </div>
+                                </div>
+                                <p class="ml-5 small">{{ comment.comment }}
+                                </p>
+                            {% endfor %}
+                            {% if user.is_authenticated %}
+                                <div class="h6">Leave a comment:</div>
+                                <form action="." method="POST">
+                                    {% csrf_token %}
+                                    <textarea name="comment" class="form-group rounded col-md-12" placeholder="Type your comment" class="form-control"></textarea>
+                                    <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                                </form>
+                            {% else %}
+                                <a href="{% url 'user-login' %}" class="h6">Please login to leave a comment.</a>
+                            {% endif %}
+                        </div>
+                        <aside class="col-lg-4">
+                            <h3 class="h6">Search the blog</h3>
+                            <form class="form-inline mt-2 mt-md-0" action="{% url 'blog-search' %}">
+                                <input class="form-control w-lg-75" type="text" name='search' placeholder="Search here">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                                <div class="m-3">
+                                    <h3>Latest Posts</h3>
+                                    {% for object in latest_post %}
+                                        <a href="{{ object.get_absolute_url }}" class="card border-success shadow p-2 text-dark nav-link">
+                                            <div>
+                                                <div>
+                                                    <strong>{{ object.title }}</strong>
+                                                </div>
+                                                {% if object.thumbnail %}
+                                                    <div class="text-center">
+                                                        <img class="img-fluid" width="200px" src="{{ object.thumbnail.url }}" alt="{{ object.title }} image"></div>
+                                                    {% endif %}
+                                                    <div class="m-2">{{ object.heading|truncatechars:100 }}</div>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    {% endblock content %}

@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('event/', include('blog.urls')),
+    path('office/', include('office.urls')),
     path('', include('core.urls')),
 
     # This is default for TinyMCE thirdparty app

@@ -25,7 +25,7 @@ SECRET_KEY = 'qs(da#!i4rhcit4fge^a&zqm*-wszm6=##w_0m#4!okciiaqtl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.17.0.2']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'blog.apps.BlogConfig',
     'core.apps.CoreConfig',
+    'office.apps.OfficeConfig',
     'crispy_forms',
     'tinymce',
 ]

@@ -6,51 +6,52 @@
             <div class="row d-flex">
                 <div class="{% cycle 'order-2' 'order-1' %} d-flex {% if not obj.thumbnail %} col-lg-12 {% else %} col-lg-7 {% endif %}">
                     <div>
-                        <a href="{{ obj.get_absolute_url }}">
+                        <a href="{{ obj.get_absolute_url }}" class="nav-link p-0">
                             <h2 class="h4">{{ obj.title }}</h2>
                         </a>
                         <p class="text-justify">{{ obj.heading|truncatewords:100 }}
                             <a href="{{ obj.get_absolute_url }}" class="btn btn-secondary">Read more>></a>
                         </p>
-                        <div class="d-flex">
-                            <div><img class="img-fluid rounded-circle" src="{{ obj.author.headshot.url }}" width="45px" alt="..." class="img-fluid"></div>
-                            <a href="{{ obj.author.user.profile.get_absolute_url }}" class="d-flex">
-                                <div class="mx-2">{{ obj.author.user }}</div>
-                            </a>
-                            <div class="">{{ obj.timestamp|timesince }}
-                                ago</div>
+                        <div class="d-flex small">
+                            <img class="h-50 img-fluid rounded-circle" src="{{ obj.author.headshot.url }}" width="45px" alt="...">
+                                <a href="{{ obj.author.user.profile.get_absolute_url }}" class="d-flex">
+                                    <div class="mx-2">{{ obj.author.user }}</div>
+                                </a>
+                                <div class="text-muted">{{ obj.timestamp }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% if obj.thumbnail %}
-                    <div class="{% cycle 'order-1' 'order-2' %} col-lg-5"><img class="rounded img-fluid" src="{{ obj.thumbnail.url }}" alt="..."></div>
-                {% endif %}
-            </div>
-            <div class="bg-success text-success rounded m-1 h6">.</div>
-        {% endfor %}
-
-
-        <div class="text-center pt-3">
-            {% if is_paginated %}
-
-                {% if page_obj.has_previous %}
-                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                    {% endif %}
+                    {% if obj.thumbnail %}
+                        <div class="{% cycle 'order-1' 'order-2' %} col-lg-5">
+                            <img class="rounded img-fluid" src="{{ obj.thumbnail.url }}" alt="..."></div>
+                        {% endif %}
+                    </div>
+                    <div class="bg-success text-success rounded m-1 h6">.</div>
                 {% endfor %}
-                {% if page_obj.has_next %}
-                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-                {% endif %}
 
-            {% endif %}
-        </div>
-    </div>
-{% endblock content %}
+
+                <div class="text-center pt-3">
+                    {% if is_paginated %}
+
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        {% endif %}
+
+                    {% endif %}
+                </div>
+            </div>
+        {% endblock content %}

@@ -10,178 +10,156 @@
                     <h4>Mabulawanong Tampakan!</h4>
                     <p>Welcome to Tampakan Website. This is website is under development.</p>
 
-                    <div class="text-center">
-                        <div class="card text-dark p-1 animated slideInUp">
-                            <div>Tampakan News</div>
-                            <div class="text-muted small">Be updated on latest news in Tampakan</div>
-                            <a href="{% url 'news'%}" class="btn btn-primary m-3">Read>></a>
-                        </div>
-                        <div class="card text-dark p-1 animated slideInUp">
-                            <div>Tampakan Tourism</div>
-                            <div class="text-muted small">Explore more about Tampakan, tourism and events</div>
-                            <a href="{% url 'touristAtrraction' %}" class="btn btn-primary m-3">Read>></a>
-                        </div>
-                        <div class="card text-dark p-1 animated slideInUp">
-                            <div>Tampakan Services</div>
-                            <div class="text-muted small">Tampakan Social and Economic Services</div>
-                            <a href="{% url 'carrers' %}" class="btn btn-primary m-3">Read>></a>
-                        </div>
-                        <div class="card text-dark p-1 animated slideInUp">
-                            <div>Appointments</div>
-                            <div class="text-muted small">Que your appointment</div>
-                            <a href="{% url 'carrers' %}" class="btn btn-primary m-3">Read>></a>
-                        </div>
-                    </div>
+                    {% include 'homeComponents/shortcutLeft.html' %}
+
                     <hr>
-                    <div class="col bg-white text-dark rounded py-2 mx-0">
-                        <div class="lead text-center">Latest News</div>
-                        <!-- News One -->
-                        {% for news in featured_news %}
-                            <div class="bg-danger text-danger rounded small">>></div>
-                            <div class="col mx-0 px-0">
-                                <a href="{{news.get_absolute_url}}" class="pl-0 mb-0 nav-link">
-                                    <div class="lead">{{news.title}}</div>
-                                </a>
-                                <p class="small text-muted">{{news.timestamp}}</p>
-                                <div>
-                                    {% if news.thumbnail %}
-                                        <div class="float-right card-header p-0 m-0 ">
-                                            <img class="img-fluid shadow rounded inlarge-scale " src="{{news.thumbnail.url}}" alt="{{ news.title }}" width="200px">
-                                        </div>
-                                    {% endif %}
-                                    <p class="text-justify small">{{news.heading|truncatechars:200}}<a href="{{news.get_absolute_url}}" class="btn btn-info">Read more >></a>
-                                    </p>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-
-                    <h4 class="text-center">Mabulawanong Tampakan!</h4>
-                    <img src="{% static 'logo/mayorJun.jpg' %}" alt="testimonial1" class="mayor-img ml-0 my-2 inlarge-scale img-fluid"/>
-                    <p class="text-justify">I believe that things that are lovely and beautiful can create harmony and peace; can improve the mental health of society and can make our municipal a more beautiful and lively place to live, giving priorities on the improvement of our
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Municipal Building, Installation of Solar Street Lights, Efficient Garbage Collection and to promote and develop our tourism industry.</p>
-                    <a href="{% url 'carrers' %}" class="h5 btn btn-info">Read more>></a>
-
-                </div>
-
-            </div>
-            <div class="col-xl-8 col-md-9 p-0">
-
-                {% include 'homeComponents/carousel.html' %}
-
-                <div class="jumbotron m-1 p-2 my-2">
-                    <div class="lead">Featured Tourist Spots:</div>
-                    <div class="card-group">
-                        {% for featured in tourism_featured %}
-                            <div class="card" style='height: v100'>
-                                <div class="card-header overflow-hidder">
-                                    {% if featured.thumbnail %}
-                                        <img class="img-fluid inlarge-scale shadow rounded py-2" src="{{ featured.thumbnail.url}}" alt="{{ featured.title}} Photo">
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <a class="nav-link pl-0" href="{{ featured.get_absolute_url }}">
-                                        <div class="card-title font-italic">{{featured.title}}</div>
+                        <div class="col bg-white text-dark rounded py-2 mx-0">
+                            <div class="lead text-center">Latest News</div>
+                            <!-- News One -->
+                            {% for news in featured_news %}
+                                <div class="bg-danger text-danger rounded small">>></div>
+                                <div class="col mx-0 px-0">
+                                    <a href="{{ news.get_absolute_url }}" class="pl-0 mb-0 nav-link">
+                                        <div class="lead">{{ news.title }}</div>
                                     </a>
-                                    <p>{{featured.heading|truncatechars:150 }}</p>
-                                    <a class="btn btn-success" href="{{ featured.get_absolute_url }}">Continue>></a>
+                                    <p class="small text-muted">{{ news.timestamp }}</p>
+                                    <div>
+                                        {% if news.thumbnail %}
+                                            <div class="float-right card-header p-0 m-0 ">
+                                                <img class="img-fluid shadow rounded inlarge-scale " src="{{ news.thumbnail.url }}" alt="{{ news.title }}" width="200px"></div>
+                                            {% endif %}
+                                            <p class="text-justify small">{{ news.heading|truncatechars:200 }}<a href="{{ news.get_absolute_url }}" class="btn btn-info">Read more >></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <h4 class="text-center">Mabulawanong Tampakan!</h4>
+                            <img src="{% static 'logo/mayorJun.jpg' %}" alt="testimonial1" class="mayor-img ml-0 my-2 inlarge-scale img-fluid"/>
+                            <p class="text-justify">I believe that things that are lovely and beautiful can create harmony and peace; can improve the mental health of society and can make our municipal a more beautiful and lively place to live, giving priorities on the improvement of our
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Municipal Building, Installation of Solar Street Lights, Efficient Garbage Collection and to promote and develop our tourism industry.</p>
+                            <a href="{% url 'carrers' %}" class="h5 btn btn-info">Read more>></a>
+
+                        </div>
+
+                    </div>
+                    <div class="col-xl-8 col-md-9 p-0">
+
+                        {% include 'homeComponents/carousel.html' %}
+
+                        <div class="jumbotron m-1 p-2 my-2">
+                            <div class="lead">Featured Tourist Spots:</div>
+                            <div class="card-group">
+                                {% for featured in tourism_featured %}
+                                    <div class="card" style='height: v100'>
+                                        <div class="card-header overflow-hidder">
+                                            {% if featured.thumbnail %}
+                                                <img class="img-fluid inlarge-scale shadow rounded py-2" src="{{ featured.thumbnail.url }}" alt="{{ featured.title }} Photo">
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-body">
+                                                <a class="nav-link pl-0" href="{{ featured.get_absolute_url }}">
+                                                    <div class="card-title font-italic">{{ featured.title }}</div>
+                                                </a>
+                                                <p>{{ featured.heading|truncatechars:150 }}</p>
+                                                <a class="btn btn-success" href="{{ featured.get_absolute_url }}">Continue>></a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="">
+                                    <div class="bg-dark text-dark h6 rounded">.</div>
+
+                                    <div class="lead">FAQ</div>
+                                    <div class="card">
+                                        <div class="card-header">How to proccess Working Permit?
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">How and when to pay taxes?
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
+                                            <a href="{% url 'carrers' %}" class="btn btn-success">Read>></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        {% endfor %}
+                            <!-- Part 2.1 -->
+                            <div class="container-fluid p-2 "></div>
+                            {% include 'homeComponents/learning3.html' %}
 
+                        </div>
+                        <div
+                            class="col-xl-1 p-1 small-width-hide">
+                            <!-- Side Photo -->
+                            {% for photo in tourism_latest %}
+                                {% if photo.thumbnail %}
+                                    <a href="{{ photo.get_absolute_url }}">
+                                        <img class="img-fluid inlarge-scale shadow rounded py-2" src="{{ photo.thumbnail.url }}" alt="{{ photo.title }} Photo" width="100%" height="100%"></a>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <!-- Part 3 -->
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6 bg-success rounded m-1 p-2">
+                                    <div class="text-center text-white h2 font-weight-bold">Tampakan Statistics</div>
+                                    <div class="p-3">
+                                        <table class="table border table-striped table-dark table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Data</th>
+                                                    <th scope="col">Date Last Updated</th>
+                                                </tr>
+                                            </thead>
+                                            {% for stats in tampakan_stats %}
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">{{ stats.name }}</th>
+                                                        <td>{{ stats.data }}</td>
+                                                        <td>{{ stats.updated }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            {% endfor %}
+                                        </table>
+                                        <div class="container text-white">
+                                            Coordinate Tourism Council
+                                            <a href="#" class="btn btn-primary">Click here</a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg rounded m-1 p-2">
+                                    {% include 'homeComponents/mapTampakan.html' %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="">
-                        <div class="bg-dark text-dark h6 rounded">.</div>
-
-                        <div class="lead">FAQ</div>
-                        <div class="card">
-                            <div class="card-header">How to proccess Working Permit?
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">How and when to pay taxes?
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti anim...
-                                <a href="{% url 'carrers'%}" class="btn btn-success">Read>></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Part 2.1 -->
-                <div class="container-fluid p-2 "></div>
-                {% include 'homeComponents/learning3.html' %}
-
-            </div>
-            <div
-                class="col-xl-1 p-1 small-width-hide">
-                <!-- Side Photo -->
-                {% for photo in tourism_latest %}
-                    {% if photo.thumbnail %}
-                        <a href="{{ photo.get_absolute_url }}">
-                            <img class="img-fluid inlarge-scale shadow rounded py-2" src="{{ photo.thumbnail.url }}" alt="{{ photo.title }} Photo" width="100%" height="100%">
-                        </a>
-                    {% endif %}
-                {% endfor %}
-
-            </div>
-        </div>
-
-        <!-- Part 3 -->
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 bg-success rounded m-1 p-2">
-                    <div class="text-center text-white h2 font-weight-bold">Tampakan Statistics</div>
-                    <div class="p-3">
-                        <table class="table border table-striped table-dark table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Date Last Updated</th>
-                                </tr>
-                            </thead>
-                            {% for stats in tampakan_stats %}
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">{{stats.name}}</th>
-                                        <td>{{stats.data}}</td>
-                                        <td>{{stats.updated}}</td>
-                                    </tr>
-                                </tbody>
-                            {% endfor %}
-                        </table>
-                        <div class="container text-white">
-                            Coordinate Tourism Council
-                            <a href="#" class="btn btn-primary">Click here</a>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg rounded m-1 p-2">
-                    {% include 'homeComponents/mapTampakan.html' %}
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock content %}
+                {% endblock content %}

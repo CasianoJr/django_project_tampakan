@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="jumbotron mx-auto col-lg-9 rounded h2 text-center my-3 p-0">Appointment Details of
+        {{appointment.name}}</div>
+    <div class="jumbotron mx-auto col-lg-9 py-3">
+        <table class="table border table-striped table-info table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Stats</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{appointment.name}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Office</td>
+                    <td>{{appointment.office}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Transaction</td>
+                    <td>{{appointment.transaction}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Contact Number</td>
+                    <td>{{appointment.contact}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Date Appointment</td>
+                    <td>{{appointment.date}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Appointment Created</td>
+                    <td>{{appointment.timestamp}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

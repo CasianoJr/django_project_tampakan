@@ -2,79 +2,64 @@
 <header class="mb-5 py-2">
     <nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top shadow bg-dark">
         <img src="{% static 'logo/tampakanLogo.png' %}" height="50px" alt="Tampakan Logo">
-        <a class="ml-2 " href="{% url 'home' %}">
-            <div class="m-auto h2 font-weight-bold text-success">TAMPAKAN</div>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="ml-2 " href="{% url 'home' %}">
+                <div class="m-auto h2 font-weight-bold text-success">TAMPAKAN</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-pills">
-                    <a class="nav-link mr-3 {% if request.path == '/'%} active {% endif %}" href="{% url 'home' %}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-pills">
-                    <a class="nav-link mr-3 {% if request.path == '/touristAttraction/'%} active {% endif %}" href="{% url 'touristAtrraction' %}">Tourism</a>
-                </li>
-                <li class="nav-pills">
-                    <a class="nav-link mr-3 {% if request.path == '/news/'%} active {% endif %}" href="{% url 'news' %}">News</a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-pills">
+                        <a class="nav-link mr-3 {% if request.path == '/' %} active {% endif %}" href="{% url 'home' %}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-pills">
+                        <a class="nav-link mr-3 {% if request.path == '/tourism/' %} active {% endif %}" href="{% url 'touristAtrraction' %}">Tourism</a>
+                    </li>
+                    <li class="nav-pills">
+                        <a class="nav-link mr-3 {% if request.path == '/news/' %} active {% endif %}" href="{% url 'news' %}">News</a>
+                    </li>
+                    <li class="nav-pills">
+                        <a class="nav-link mr-3 {% if request.path == '/office/' %} active {% endif %}" href="{% url 'office-list' %}">Services</a>
+                    </li>
+                    <li class="nav-pills">
+                        <a class="nav-link mr-3 {% if request.path == '/carrers/' %} active {% endif %}" href="{% url 'carrers' %}">Carrers</a>
+                    </li>
+                    <li class="nav-pills">
+                        <a class="nav-link {% if request.path == '/event/articles/' %} active {% endif %}" href="{% url 'blog-articles' %}">Articles</a>
+                    </li>
 
-                <li class="nav-pills dropdown">
-                    <a class="nav-link dropdown-toggle mr-3 {% if request.path == '/services/'%} active {% endif %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'services' %}">Services</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Office of the Mayor</a>
-                        <a class="dropdown-item" href="#">General Services Office</a>
-                        <a class="dropdown-item" href="#">Tourism Office</a>
-                        <a class="dropdown-item" href="#">Office of the Vice Mayor</a>
-                        <a class="dropdown-item" href="#">Office of the SB Secretary</a>
-                        <a class="dropdown-item" href="#">Municipal Agriculture Office</a>
-                        <a class="dropdown-item" href="#">Municipal Health Office</a>
-                        <a class="dropdown-item" href="#">Municipal Social Welfare and Development Office</a>
-                        <a class="dropdown-item" href="#">Municipal Environment and Natural Resources Office</a>
-                        <a class="dropdown-item" href="#">Municipal Street Cleaners</a>
-                        <a class="dropdown-item" href="#">Philippine National Police</a>
-                        <a class="dropdown-item" href="#">Department of Agrarian Reform</a>
-                        <a class="dropdown-item" href="#">Department of Interior and Local Government</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-pills">
-                    <a class="nav-link mr-3 {% if request.path == '/carrers/'%} active {% endif %}" href="{% url 'carrers' %}">Carrers</a>
-                </li>
-                <li class="nav-pills">
-                    <a class="nav-link {% if request.path == '/event/articles/'%} active {% endif %}" href="{% url 'blog-articles' %}">Articles</a>
-                </li>
+                    <li class="nav-pills dropdown">
+                        <a class="nav-link dropdown-toggle mr-3 {% if request.path == '/services/' %} active {% endif %}" id="navbarAcct" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'services' %}">Accounts</a>
 
-                <li class="nav-pills dropdown">
-                    <a class="nav-link dropdown-toggle mr-3 {% if request.path == '/services/'%} active {% endif %}" id="navbarAcct" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'services' %}">Accounts</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarAcct">
+                            {% if user.is_authenticated %}
+                                <a class="dropdown-item {% if '/user/profile/' in request.path %} active {% endif %}" href="{{ user.profile.get_absolute_url }}">Profile</a>
+                                <a class="dropdown-item" href="{% url 'user-logout' %}">Logout</a>
+                                <a class="dropdown-item {% if request.path == '/blog/create/' %} active {% endif %}" href="{% url 'blog-create' %}">Create Blog</a>
+                            {% else %}
+                                <a class="dropdown-item {% if request.path == '/user/login/' %} active {% endif %}" href="{% url 'user-login' %}">Login</a>
+                                <a class="dropdown-item {% if request.path == '/user/register/' %} active {% endif %}" href="{% url 'user-register' %}">Register</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                        </div>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarAcct">
-                        {% if user.is_authenticated %}
-                            <a class="dropdown-item {% if '/user/profile/' in request.path %} active {% endif %}" href="{{ user.profile.get_absolute_url }}">Profile</a>
-                            <a class="dropdown-item" href="{% url 'user-logout' %}">Logout</a>
-                            <a class="dropdown-item {% if request.path == '/blog/create/'%} active {% endif %}" href="{% url 'blog-create' %}">Create Blog</a>
-                        {% else %}
-                            <a class="dropdown-item {% if request.path == '/user/login/' %} active {% endif %}" href="{% url 'user-login' %}">Login</a>
-                            <a class="dropdown-item {% if request.path == '/user/register/' %} active {% endif %}" href="{% url 'user-register' %}">Register</a>
-                        {% endif %}
-                        <div class="dropdown-divider"></div>
-                    </div>
+                    </li>
 
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert btn-{{ message.tags }}">
-                {{ message }}
+                </ul>
             </div>
-        {% endfor %}
-    {% endif %}
-</header>
+        </nav>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mt-5 mb-0 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss='alert' aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </header>
