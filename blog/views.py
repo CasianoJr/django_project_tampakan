@@ -17,7 +17,7 @@ def blog_detail(request, slug):
         comments.user = request.user
         comments.save()
     context = {
-        'title': 'Blog Details',
+        'title': 'Tampakan Website',
         'post': post,
         'latest_post': Post.objects.all().order_by('-timestamp').exclude(slug=slug)[:4],
     }

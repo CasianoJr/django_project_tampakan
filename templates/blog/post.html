@@ -8,18 +8,18 @@
                     {% endif %}
                     <div class="row">
                         <div class="h3 ml-4">{{ post.title }}</div>
-                        {% if post.author.user == user %}
-                            <div class="text-center mx-auto">
-                                <span class="fb-share-button mt-2" data-href="{{ post.get_absolute_url }}" data-layout="button" data-size="large">
-                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-                                </span>
+                        <div class="text-center mx-auto">
+                            <span class="fb-share-button mt-2" data-href="http://95.110.177.122{{ request.path }}" data-layout="button" data-size="large">
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                            </span>
+                            {% if post.author.user == user %}
                                 <a class="btn btn-secondary mt-2 ml-2" href="{% url 'blog-update' post.slug %}">Update</a>
                                 <a class="btn btn-danger mt-2" href="{{ post.get_delete_url }}">Delete</a>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="d-flex">
-                        <img class="img-fluid rounded-circle" src="{{ post.author.headshot.url }}" width="40px" alt="...">
+                        <img class="h-50 img-fluid rounded-circle" src="{{ post.author.headshot.url }}" width="30px" height="30px" alt="...">
                             <div>
                                 <a href="{{ post.author.user.profile.get_absolute_url }}">
                                     <div class="mx-3 title">
