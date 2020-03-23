@@ -7,10 +7,10 @@
             <div class="col-lg-4 shadow">
                 <div class="lead font-weight-bold text-center my-3">Tampakan Offices</div>
                 {% for office in offices %}
-                    <a href="{{office.get_absolute_url}}" class="nav-link p-1 border border-secondary rounded">
+                    <a href="{{ office.get_absolute_url }}" class="nav-link p-1 border border-secondary rounded">
                         <div class="d-flex">
-                            <div class="h6">{{office.name}}
-                                <span class="badge badge-info">{{office.get_appointments.count}}</span>
+                            <div class="h6">{{ office.name }}
+                                <span class="badge badge-info">{{ office.get_appointments.count }}</span>
                             </div>
                         </div>
                     </a>
@@ -26,14 +26,14 @@
                 </div>
                 <div class="card-group">
                     <div class="card text-dark p-1 animated slideInUp">
-                        <div>Appointments</div>
-                        <div class="text-muted small">Que your appointment</div>
-                        <a href="{% url 'create-appointment' %}" class="btn btn-primary m-3">Set>></a>
+                        <div>Other information 1</div>
+                        <div class="text-muted small">Description Other information</div>
+                        <a href="{% url 'carrers' %}" class="btn btn-info m-3">Set>></a>
                     </div>
                     <div class="card text-dark p-1 animated slideInUp">
-                        <div>Appointments</div>
-                        <div class="text-muted small">Que your appointment</div>
-                        <a href="{% url 'create-appointment' %}" class="btn btn-primary m-3">Create>></a>
+                        <div>Other information 2</div>
+                        <div class="text-muted small">Description Other information</div>
+                        <a href="{% url 'carrers' %}" class="btn btn-secondary m-3">Create>></a>
                     </div>
                 </div>
                 <div class="card-group">

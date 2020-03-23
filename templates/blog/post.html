@@ -10,6 +10,9 @@
                         <div class="h3 ml-4">{{ post.title }}</div>
                         {% if post.author.user == user %}
                             <div class="text-center mx-auto">
+                                <span class="fb-share-button mt-2" data-href="{{ post.get_absolute_url }}" data-layout="button" data-size="large">
+                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                                </span>
                                 <a class="btn btn-secondary mt-2 ml-2" href="{% url 'blog-update' post.slug %}">Update</a>
                                 <a class="btn btn-danger mt-2" href="{{ post.get_delete_url }}">Delete</a>
                             </div>
@@ -25,6 +28,7 @@
                                 </a>
                                 <div class="mx-3 small text-muted">{{ post.timestamp }}
                                     ago</div>
+
                             </div>
 
                         </div>
@@ -87,4 +91,6 @@
                                 </aside>
                             </div>
                         </div>
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
                     {% endblock content %}

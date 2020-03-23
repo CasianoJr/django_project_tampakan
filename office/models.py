@@ -1,6 +1,7 @@
 from django.db import models
 from .option import BARANGAY_OPTION, OFFICE_OPTION
 from django.shortcuts import reverse
+from tinymce.models import HTMLField
 
 
 class Office(models.Model):
@@ -46,7 +47,11 @@ class Service(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
     content = models.TextField()
+    annotate = HTMLField('Content', blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('service-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'{self.title} for {self.office}'

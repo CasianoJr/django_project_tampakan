@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from .models import Office, Appointment
+from .models import Office, Appointment, Service
 from .forms import CreateAppointmentForm
 from django.contrib import messages
 
@@ -31,3 +31,8 @@ def create_appointment(request):
 def appointment_detail(request, pk):
     context = {'appointment': get_object_or_404(Appointment, pk=pk)}
     return render(request, 'office/appointment_detail.html', context)
+
+
+def service_detail(request, pk):
+    context = {'service': get_object_or_404(Service, pk=pk)}
+    return render(request, 'office/service_detail.html', context)

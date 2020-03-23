@@ -4,26 +4,26 @@
     <div class="jumbotron mx-auto col-lg-9">
         {% for obj in tourist_attraction %}
             <div class="row d-flex">
-                <div class="{% cycle 'order-2' 'order-1' %} d-flex {% if not obj.thumbnail %} col-lg-12 {% else %} col-lg-7 {% endif %}">
+                <div class="order-2 d-flex {% if not obj.thumbnail %} col-lg-12 {% else %} col-lg-7 {% endif %}">
                     <div>
                         <a href="{{ obj.get_absolute_url }}" class="nav-link p-0">
                             <h2 class="h4">{{ obj.title }}</h2>
                         </a>
-                        <p class="text-justify">{{ obj.heading|truncatewords:100 }}
-                            <a href="{{ obj.get_absolute_url }}" class="btn btn-secondary">Read more>></a>
-                        </p>
                         <div class="d-flex small">
-                            <img class="h-50 img-fluid rounded-circle" src="{{ obj.author.headshot.url }}" width="45px" alt="...">
+                            <img class="h-50 img-fluid rounded-circle" src="{{ obj.author.headshot.url }}" width="30px" alt="...">
                                 <a href="{{ obj.author.user.profile.get_absolute_url }}" class="d-flex">
                                     <div class="mx-2">{{ obj.author.user }}</div>
                                 </a>
                                 <div class="text-muted">{{ obj.timestamp }}
                                 </div>
                             </div>
+                            <p class="text-justify">{{ obj.heading|truncatewords:100 }}
+                                <a href="{{ obj.get_absolute_url }}" class="btn btn-secondary">Read more>></a>
+                            </p>
                         </div>
                     </div>
                     {% if obj.thumbnail %}
-                        <div class="{% cycle 'order-1' 'order-2' %} col-lg-5">
+                        <div class="order-1 col-lg-5">
                             <img class="rounded img-fluid" src="{{ obj.thumbnail.url }}" alt="..."></div>
                         {% endif %}
                     </div>
